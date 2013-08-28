@@ -1,0 +1,30 @@
+{
+    "name": "atomicphp/logging",
+    "type": "library",
+    "description": "An open-source PSR-3 compatible logging library",
+    "keywords": [
+        "PSR-3",
+        "Logging",
+        "Sentry"
+    ],
+    "homepage": "https://github.com/AtomicPHP/Logging",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Niels Nijens",
+            "email": "nijens.niels@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "psr/log": "1.0.*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "AtomicPHP\\Logging": "src/"
+        }
+    }
+}
