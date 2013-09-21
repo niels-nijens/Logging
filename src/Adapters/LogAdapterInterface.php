@@ -1,4 +1,7 @@
 <?php
+
+namespace AtomicPHP\Logging\Adapters;
+
 /**
  * LogAdapterInterface
  *
