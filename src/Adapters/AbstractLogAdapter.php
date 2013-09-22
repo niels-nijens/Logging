@@ -121,22 +121,71 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
     }
 
     /**
-     * isLoggingForChannel
+     * log
+     *
+     * Logs a $message of $level to this log adapter (with a certain $context).
+     * Returns true when logging is successful or when success cannot be determined.
+     *
+     * @access public
+     * @param  string   $level
+     * @param  string   $message
+     * @param  array    $context
+     * @return boolean
+     * @throws InvalidArgumentException
+     **/
+    public function log($level, $message, array $context = array() )
+    {
+        if (!Logger::isValidLogLevel($level) ) {
+            throw new InvalidArgumentException("'" . $level . "' is not a valid LogLevel.");
+        }
+
+        if ($this->isLoggingForChannelAndLogLevel($context) ) {
+            return $this->write($level, $message, $context);
+        }
+
+        return false;
+    }
+
+    /**
+     * isLoggingForChannelAndLogLevel
      *
      * Returns true when:
+     * - $level is equal to or above the minimum configured log level
+     *
+     * And
+     *
      * - No channel has been set in $context
      * - No channels have been set in the adapter (meaning log all channels)
      * - The channel in $context is set as channel in this adapter
      *
      * @access public
-     * @param  array $configuration
-     * @return void
+     * @param  string   $level
+     * @param  array    $context
+     * @return boolean
      **/
-    protected function isLoggingForChannel(array $context) {
-        if (!array_key_exists("channel", $context) || count($this->getChannels() ) === 0 || in_array($context["channel"], $this->getChannels() ) ) {
-            return true;
+    protected function isLoggingForChannelAndLogLevel($level, array $context) {
+        $isLogging = true;
+        if (array_key_exists("level", $this->configuration) && !in_array($level, Logger::getLogLevels($this->configuration["level"]) ) ) {
+            $isLogging = false;
         }
 
-        return false;
+        if ($isLogging === true && (!array_key_exists("channel", $context) || count($this->getChannels() ) === 0 || in_array($context["channel"], $this->getChannels() ) ) ) {
+            $isLogging = true;
+        }
+
+        return $isLogging;
     }
+
+    /**
+     * write
+     *
+     * Writes the message to the log
+     *
+     * @access protected
+     * @param  string   $level
+     * @param  string   $message
+     * @param  array    $context
+     * @return boolean
+     **/
+    abstract protected function write($level, $message, array $context = array() );
 }
