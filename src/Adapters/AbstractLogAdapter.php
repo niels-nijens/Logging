@@ -2,6 +2,9 @@
 
 namespace AtomicPHP\Logging\Adapters;
 
+use \AtomicPHP\Logging\Logger;
+use \Psr\Log\InvalidArgumentException;
+
 /**
  * AbstractLogAdapter
  *
@@ -139,7 +142,7 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
             throw new InvalidArgumentException("'" . $level . "' is not a valid LogLevel.");
         }
 
-        if ($this->isLoggingForChannelAndLogLevel($context) ) {
+        if ($this->isLoggingForChannelAndLogLevel($level, $context) ) {
             return $this->write($level, $message, $context);
         }
 
