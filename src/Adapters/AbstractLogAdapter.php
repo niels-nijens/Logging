@@ -168,7 +168,7 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      **/
     protected function isLoggingForChannelAndLogLevel($level, array $context) {
         $isLogging = true;
-        if (array_key_exists("level", $this->configuration) && !in_array($level, Logger::getLogLevels($this->configuration["level"]) ) ) {
+        if (!in_array($level, Logger::getLogLevels($this->getConfigurationValue("level") ) ) ) {
             $isLogging = false;
         }
 
