@@ -2,6 +2,7 @@
 
 namespace AtomicPHP\Logging\Adapters;
 
+use \DateTime;
 use \RuntimeException;
 
 /**
@@ -34,9 +35,9 @@ class StreamLogAdapter extends AbstractLogAdapter
     {
         parent::__construct($channels, $configuration);
 
-        $resource = @fopen($this->configuration["resource"], "a");
+        $resource = @fopen($this->getConfigurationValue("resource"), "a");
         if (!is_resource($resource) ) {
-            throw new RuntimeException("Cannot open resource '" . $this->configuration["resource"] . "' for " . __CLASS__ . ".");
+            throw new RuntimeException("Cannot open resource '" . $this->getConfigurationValue("resource") . "' for " . __CLASS__ . ".");
         }
 
         $this->resource = $resource;
@@ -57,6 +58,6 @@ class StreamLogAdapter extends AbstractLogAdapter
     {
         $timestamp = new DateTime();
 
-        fwrite($this->resource, sprintf("%s %s %s", array($timestamp->format("Y-m-d H:i:s"), strtoupper($level), $message) ) );
+        return (fwrite($this->resource, vsprintf("%s %s %s\n", array($timestamp->format("Y-m-d H:i:s"), strtoupper($level), $message) ) ) !== false);
     }
 }
