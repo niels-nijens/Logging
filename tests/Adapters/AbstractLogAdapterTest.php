@@ -2,6 +2,8 @@
 
 namespace AtomicPHP\Logging\Tests;
 
+use \Psr\Log\LogLevel;
+
 /**
  * AbstractLogAdapterTest
  *
@@ -10,7 +12,7 @@ namespace AtomicPHP\Logging\Tests;
 abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * testLogThrowsInvalidArgumentExceptionOnInvalidLevel
+     * testImplementsLogAdapterInterface
      *
      * Tests if the log adapter implements the LogAdapterInterfaces
      *
@@ -20,6 +22,94 @@ abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
     public function testImplementsLogAdapterInterface()
     {
         $this->assertInstanceOf("AtomicPHP\\Logging\\Adapters\\LogAdapterInterface", $this->getAdapter() );
+    }
+
+    /**
+     * testGetChannels
+     *
+     * Tests if
+     *
+     * @access public
+     * @return void
+     **/
+    public function testGetChannels()
+    {
+        $adapter = $this->getAdapter();
+
+        $this->assertInternalType("array", $adapter->getChannels() );
+        $this->assertEmpty($adapter->getChannels() );
+
+        $adapter->setChannels(array("foo", "bar") );
+
+        $this->assertInternalType("array", $adapter->getChannels() );
+        $this->assertSame(array("foo", "bar"), $adapter->getChannels() );
+    }
+
+    /**
+     * testSetAndGetConfigurationValue
+     *
+     * Tests if
+     *
+     * @access public
+     * @return void
+     **/
+    public function testSetAndGetConfigurationValue()
+    {
+        $adapter = $this->getAdapter();
+
+        $this->assertInternalType("array", $adapter->getConfiguration() );
+        //$this->assertEmpty($adapter->getConfiguration() );
+
+        $this->assertNull($adapter->getConfigurationValue("foo") );
+
+        $adapter->setConfigurationValue("foo", "bar");
+
+        $this->assertSame("bar", $adapter->getConfigurationValue("foo") );
+    }
+
+    /**
+     * testLogAndIsLoggingForChannelAndLogLevel
+     *
+     * Tests if
+     *
+     * @dataProvider provideTestLogAndIsLoggingForChannelAndLogLevel
+     * @access public
+     * @param  string   $level
+     * @param  array    $context
+     * @param  array    $configuration
+     * @param  boolean  $expectedReturnValue
+     * @return void
+     **/
+    public function testLogAndIsLoggingForChannelAndLogLevel($level, array $context, array $channels, array $configuration, $expectedReturnValue)
+    {
+        $adapter = $this->getAdapter();
+        $adapter->setChannels($channels);
+        $adapter->setConfiguration($configuration);
+
+        $this->assertSame($expectedReturnValue, $adapter->log($level, "", $context) );
+    }
+
+    /**
+     * provideTestLogAndIsLoggingForChannelAndLogLevel
+     *
+     * Tests if
+     *
+     * @access public
+     * @return array
+     **/
+    public function provideTestLogAndIsLoggingForChannelAndLogLevel()
+    {
+        return array(
+            array(LogLevel::NOTICE, array(), array(), array(), true),
+            array(LogLevel::NOTICE, array(), array("foo"), array(), true),
+            array(LogLevel::NOTICE, array("channel" => "foo"), array("foo"), array(), true),
+            array(LogLevel::NOTICE, array("channel" => "foo"), array(), array(), true),
+            array(LogLevel::INFO, array(), array(), array("level" => LogLevel::INFO), true),
+            array(LogLevel::INFO, array(), array(), array("level" => LogLevel::NOTICE), false),
+            array(LogLevel::INFO, array("channel" => "foo"), array("foo"), array("level" => LogLevel::INFO), true),
+            array(LogLevel::INFO, array("channel" => "foo"), array("foo"), array("level" => LogLevel::NOTICE), false),
+            array(LogLevel::INFO, array(), array("foo"), array("level" => LogLevel::NOTICE), false),
+        );
     }
 
     /**
