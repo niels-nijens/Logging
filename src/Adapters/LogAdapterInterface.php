@@ -5,7 +5,8 @@ namespace AtomicPHP\Logging\Adapters;
 /**
  * LogAdapterInterface
  *
- * @author Niels Nijens <nijens.niels@gmail.com>
+ * @author  Niels Nijens <nijens.niels@gmail.com>
+ * @package AtomicPHP\Logging\Adapters
  **/
 interface LogAdapterInterface {
 

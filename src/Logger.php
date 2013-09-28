@@ -12,8 +12,9 @@ use \Psr\Log\LogLevel;
 /**
  * Logger
  *
- * @author Niels Nijens <nijens.niels@gmail.com>
- */
+ * @author  Niels Nijens <nijens.niels@gmail.com>
+ * @package AtomicPHP\Logging
+ **/
 class Logger extends AbstractLogger
 {
     /**

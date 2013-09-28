@@ -7,7 +7,8 @@ use \DateTime;
 /**
  * MemoryLogger
  *
- * @author Niels Nijens <nijens.niels@gmail.com>
+ * @author  Niels Nijens <nijens.niels@gmail.com>
+ * @package AtomicPHP\Logging\Adapters
  **/
 class MemoryLogAdapter extends AbstractLogAdapter
 {

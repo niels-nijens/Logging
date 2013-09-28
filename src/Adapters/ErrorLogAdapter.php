@@ -5,7 +5,8 @@ namespace AtomicPHP\Logging\Adapters;
 /**
  * ErrorLogAdapter
  *
- * @author Niels Nijens <nijens.niels@gmail.com>
+ * @author  Niels Nijens <nijens.niels@gmail.com>
+ * @package AtomicPHP\Logging\Adapters
  * */
 class ErrorLogAdapter extends AbstractLogAdapter
 {
