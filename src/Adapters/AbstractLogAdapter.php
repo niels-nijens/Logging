@@ -8,7 +8,8 @@ use \Psr\Log\InvalidArgumentException;
 /**
  * AbstractLogAdapter
  *
- * @author Niels Nijens <nijens.niels@gmail.com>
+ * @author  Niels Nijens <nijens.niels@gmail.com>
+ * @package AtomicPHP\Logging\Adapters
  **/
 abstract class AbstractLogAdapter implements LogAdapterInterface
 {
@@ -38,7 +39,8 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      * @param  array $configuration
      * @return LogAdapterInterface
      **/
-    public function __construct(array $channels = array(), array $configuration = array() ) {
+    public function __construct(array $channels = array(), array $configuration = array() )
+    {
         $this->setChannels($channels);
         $this->setConfiguration($configuration);
     }
@@ -51,7 +53,8 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      * @access public
      * @return array
      **/
-    public function getChannels() {
+    public function getChannels()
+    {
         return $this->channels;
     }
 
@@ -63,7 +66,8 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      * @access public
      * @return array
      **/
-    public function getConfiguration() {
+    public function getConfiguration()
+    {
         return $this->configuration;
     }
 
@@ -76,7 +80,8 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      * @param  string $key
      * @return mixed
      **/
-    public function getConfigurationValue($key) {
+    public function getConfigurationValue($key)
+    {
         if (array_key_exists($key, $this->configuration) ) {
             return $this->configuration[$key];
         }
@@ -93,7 +98,8 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      * @param  array $channels
      * @return array
      **/
-    public function setChannels(array $channels) {
+    public function setChannels(array $channels)
+    {
         $this->channels = $channels;
     }
 
@@ -106,7 +112,8 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      * @param  array $configuration
      * @return void
      **/
-    public function setConfiguration(array $configuration) {
+    public function setConfiguration(array $configuration)
+    {
         $this->configuration = $configuration;
     }
 
@@ -119,7 +126,8 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      * @param  array $configuration
      * @return void
      **/
-    public function setConfigurationValue($key, $value) {
+    public function setConfigurationValue($key, $value)
+    {
         $this->configuration[$key] = $value;
     }
 
@@ -166,7 +174,8 @@ abstract class AbstractLogAdapter implements LogAdapterInterface
      * @param  array    $context
      * @return boolean
      **/
-    protected function isLoggingForChannelAndLogLevel($level, array $context) {
+    protected function isLoggingForChannelAndLogLevel($level, array $context)
+    {
         $isLogging = true;
         if (!in_array($level, Logger::getLogLevels($this->getConfigurationValue("level") ) ) ) {
             $isLogging = false;
