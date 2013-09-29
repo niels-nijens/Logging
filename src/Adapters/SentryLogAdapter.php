@@ -63,6 +63,12 @@ class SentryLogAdapter extends AbstractLogAdapter
         else {
             $this->client->captureMessage($message, $context, $this->translateLogLevelToSentryLevel($level) );
         }
+
+        if (is_null($this->client->getLastError() ) ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
