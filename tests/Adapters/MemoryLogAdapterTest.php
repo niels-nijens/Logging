@@ -7,7 +7,8 @@ use \AtomicPHP\Logging\Adapters\MemoryLogAdapter;
 /**
  * MemoryLogAdapterTest
  *
- * @author Niels Nijens <nijens.niels@gmail.com>
+ * @author  Niels Nijens <nijens.niels@gmail.com>
+ * @package AtomicPHP\Logging\Tests
  **/
 class MemoryLogAdapterTest extends AbstractLogAdapterTest
 {

@@ -2,13 +2,15 @@
 
 namespace AtomicPHP\Logging\Tests;
 
+use \Exception;
 use \Psr\Log\LogLevel;
 
 /**
  * AbstractLogAdapterTest
  *
- * @author Niels Nijens <nijens.niels@gmail.com>
- */
+ * @author  Niels Nijens <nijens.niels@gmail.com>
+ * @package AtomicPHP\Logging\Tests
+ **/
 abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -58,8 +60,6 @@ abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
         $adapter = $this->getAdapter();
 
         $this->assertInternalType("array", $adapter->getConfiguration() );
-        //$this->assertEmpty($adapter->getConfiguration() );
-
         $this->assertNull($adapter->getConfigurationValue("foo") );
 
         $adapter->setConfigurationValue("foo", "bar");
@@ -86,7 +86,7 @@ abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
         $adapter->setChannels($channels);
         $adapter->setConfiguration($configuration);
 
-        $this->assertSame($expectedReturnValue, $adapter->log($level, "", $context) );
+        $this->assertSame($expectedReturnValue, $adapter->log($level, "Test message", $context) );
     }
 
     /**
@@ -109,6 +109,7 @@ abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
             array(LogLevel::INFO, array("channel" => "foo"), array("foo"), array("level" => LogLevel::INFO), true),
             array(LogLevel::INFO, array("channel" => "foo"), array("foo"), array("level" => LogLevel::NOTICE), false),
             array(LogLevel::INFO, array(), array("foo"), array("level" => LogLevel::NOTICE), false),
+            array(LogLevel::ERROR, array("exception" => new Exception("Test exception") ), array("foo"), array("level" => LogLevel::NOTICE), true),
         );
     }
 

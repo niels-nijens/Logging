@@ -7,7 +7,8 @@ use \AtomicPHP\Logging\Adapters\StreamLogAdapter;
 /**
  * MemoryLogAdapterTest
  *
- * @author Niels Nijens <nijens.niels@gmail.com>
+ * @author  Niels Nijens <nijens.niels@gmail.com>
+ * @package AtomicPHP\Logging\Tests
  **/
 class StreamLogAdapterTest extends AbstractLogAdapterTest
 {
