@@ -37,7 +37,7 @@ class SentryLogAdapterTest extends AbstractLogAdapterTest
     {
         parent::testLogAndIsLoggingForChannelAndLogLevel($level, $context, $channels, $configuration, $expectedReturnValue);
 
-        sleep(60);
+        sleep(90);
     }
 
     /**
