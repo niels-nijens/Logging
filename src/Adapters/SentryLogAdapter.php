@@ -36,7 +36,11 @@ class SentryLogAdapter extends AbstractLogAdapter
     {
         parent::__construct($channels, $configuration);
 
-        $this->client = new Raven_Client($this->getConfigurationValue("dsn") );
+        if ( !($this->client = $this->getConfigurationValue("raven_client") ) instanceof Raven_Client) {
+            $this->client = new Raven_Client($this->getConfigurationValue("dsn") );
+
+            $this->setConfigurationValue("raven_client", $this->client);
+        }
     }
 
     /**
