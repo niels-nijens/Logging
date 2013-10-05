@@ -14,8 +14,8 @@ spl_autoload_register(function($className) {
         if (is_file(__DIR__ . "/../src/" . $classNameFile) ) {
             include __DIR__ . "/../src/" . $classNameFile;
         }
-        elseif (is_file(__DIR__ . "/../" . $classNameFile) ) {
-            include __DIR__ . "/../" . $classNameFile;
+        elseif (is_file(__DIR__ . "/../" . lcfirst($classNameFile) ) ) {
+            include __DIR__ . "/../" . lcfirst($classNameFile);
         }
     }
 }, true);
