@@ -1,7 +1,7 @@
 {
     "name": "atomicphp/logging",
     "type": "library",
-    "description": "An open-source PSR-3 compatible logging library",
+    "description": "A PSR-3 compatible logging library for PHP 5.3+",
     "keywords": [
         "PSR-3",
         "Logging",
