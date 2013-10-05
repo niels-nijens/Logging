@@ -10,15 +10,12 @@ spl_autoload_register(function($className) {
     $vendorNamespace = "AtomicPHP\\Logging\\";
     if (strpos($className, $vendorNamespace) === 0) {
         $classNameFile = substr($className, strlen($vendorNamespace) ) . ".php";
-        var_dump($classNameFile);
 
         if (is_file(__DIR__ . "/../src/" . $classNameFile) ) {
-            var_dump(__LINE__, __DIR__ . "/../src/" . $classNameFile);
             include __DIR__ . "/../src/" . $classNameFile;
         }
-        elseif (is_file(__DIR__ . "/../" . lcfirst($classNameFile) ) ) {
-            var_dump(__LINE__, __DIR__ . "/../" . lcfirst($classNameFile) );
-            include __DIR__ . "/../" . lcfirst($classNameFile);
+        elseif (is_file(__DIR__ . "/" . lcfirst($classNameFile) ) ) {
+            include __DIR__ . "/" . lcfirst($classNameFile);
         }
     }
 }, true);
