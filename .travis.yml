@@ -3,11 +3,12 @@ language: php
 php:
   - 5.3
   - 5.4
+  - 5.5
 
-before_script: composer install --dev
-
-script:
+before_script:
+  - composer install --dev
   - mkdir -p build/logs
-  - phpunit --coverage-text --coverage-clover build/logs/clover.xml
+
+script: phpunit --coverage-clover build/logs/clover.xml
 
 after_script: php vendor/bin/coveralls -v
