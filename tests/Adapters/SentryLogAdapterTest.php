@@ -3,6 +3,7 @@
 namespace AtomicPHP\Logging\Tests;
 
 use \AtomicPHP\Logging\Adapters\SentryLogAdapter;
+use \Psr\Log\LogLevel;
 
 /**
  * SentryLogAdapterTest
@@ -21,23 +22,73 @@ class SentryLogAdapterTest extends AbstractLogAdapterTest
     protected $adapter;
 
     /**
-     * testLogAndIsLoggingForChannelAndLogLevel
+     * testInstantiationWithDSNSetsNewRavenClientInstanceAsConfigationValue
      *
-     * Tests if
+     * Tests if instantiation of a new SentryLogAdapter adds the Raven_Client as configuration value with key "raven_client"
      *
-     * @dataProvider provideTestLogAndIsLoggingForChannelAndLogLevel
      * @access public
-     * @param  string   $level
-     * @param  array    $context
-     * @param  array    $configuration
-     * @param  boolean  $expectedReturnValue
      * @return void
      **/
-    public function testLogAndIsLoggingForChannelAndLogLevel($level, array $context, array $channels, array $configuration, $expectedReturnValue)
-    {
-        parent::testLogAndIsLoggingForChannelAndLogLevel($level, $context, $channels, $configuration, $expectedReturnValue);
+    public function testInstantiationWithDSNSetsNewRavenClientInstanceAsConfigationValue() {
+        $adapter = new SentryLogAdapter(array(), array("dsn" => "https://013b55d20bd649c9b5415e52cedf53bc:540243d7c1ce4fb9b2e306081b74d500@app.getsentry.com/13505") );
 
-        sleep(60);
+        $this->assertInstanceOf("Raven_Client", $adapter->getConfigurationValue("raven_client") );
+    }
+
+    /**
+     * testLogReturnsFalseOnRavenClientError
+     *
+     * Tests if SentryLogAdapter::log returns false when an error occured in the Raven_Client
+     *
+     * @access public
+     * @return void
+     **/
+    public function testLogReturnsFalseOnRavenClientError() {
+        $client = new MockRavenClient("https://013b55d20bd649c9b5415e52cedf53bc:540243d7c1ce4fb9b2e306081b74d500@app.getsentry.com/13505");
+        $client->setLastError("Error");
+
+        $adapter = new SentryLogAdapter(array(), array("raven_client" => $client) );
+        $this->assertFalse($adapter->log(LogLevel::INFO, "Test message") );
+    }
+
+    /**
+     * testTranslateLogLevelToSentryLevel
+     *
+     * Tests if SentryLogAdapter::translateLogLevelToSentryLevel returns the expected Raven_Client constant for a LogLevel constant
+     *
+     * @dataProvider provideTestTranslateLogLevelToSentryLevel
+     * @access public
+     * @param  string $logLevel
+     * @param  string $ravenClientLevel
+     * @return void
+     **/
+    public function testTranslateLogLevelToSentryLevel($logLevel, $ravenClientLevel) {
+        $adapter = $this->getAdapter();
+        $adapter->log($logLevel, "Test message");
+
+        $ravenClient = $adapter->getConfigurationValue("raven_client");
+        $this->assertEquals($ravenClientLevel, $ravenClient->lastSentData["level"]);
+    }
+
+    /**
+     * provideTestTranslateLogLevelToSentryLevel
+     *
+     * Returns an array with LogLevel and Raven_Client constants for testing
+     *
+     * @access public
+     * @return array
+     **/
+    public function provideTestTranslateLogLevelToSentryLevel() {
+        return array(
+            array(LogLevel::EMERGENCY, MockRavenClient::FATAL),
+            array(LogLevel::ALERT, MockRavenClient::FATAL),
+            array(LogLevel::CRITICAL, MockRavenClient::FATAL),
+            array(LogLevel::ERROR, MockRavenClient::ERROR),
+            array(LogLevel::WARNING, MockRavenClient::WARNING),
+            array(LogLevel::NOTICE, MockRavenClient::INFO),
+            array(LogLevel::INFO, MockRavenClient::INFO),
+            array(LogLevel::DEBUG, MockRavenClient::DEBUG),
+        );
     }
 
     /**
@@ -50,7 +101,11 @@ class SentryLogAdapterTest extends AbstractLogAdapterTest
      **/
     protected function getAdapter()
     {
-        $this->adapter = new SentryLogAdapter(array(), array("dsn" => "https://013b55d20bd649c9b5415e52cedf53bc:540243d7c1ce4fb9b2e306081b74d500@app.getsentry.com/13505") );
+        $options = array(
+            "raven_client" => new MockRavenClient("https://013b55d20bd649c9b5415e52cedf53bc:540243d7c1ce4fb9b2e306081b74d500@app.getsentry.com/13505"),
+        );
+
+        $this->adapter = new SentryLogAdapter(array(), $options);
 
         return $this->adapter;
     }
