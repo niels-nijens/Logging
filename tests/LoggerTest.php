@@ -34,6 +34,8 @@ class LoggerTest extends LoggerInterfaceTest
     {
         $logger = new Logger();
         $logger->addAdapter(new MemoryLogAdapter() );
+
+        $this->assertCount(1, $logger->getAdapters() );
     }
 
     /**
@@ -49,6 +51,8 @@ class LoggerTest extends LoggerInterfaceTest
     {
         $logger = new Logger();
         $logger->addAdapter(new MemoryLogAdapter(), "test");
+
+        $this->assertInstanceOf("AtomicPHP\\Logging\\Adapters\\MemoryLogAdapter", $logger->getAdapter("test") );
     }
 
     /**
@@ -66,6 +70,28 @@ class LoggerTest extends LoggerInterfaceTest
         $logger = new Logger();
         $logger->addAdapter(new MemoryLogAdapter(), "test");
         $logger->addAdapter(new MemoryLogAdapter(), "test");
+    }
+
+    /**
+     * testInitialiseAdapters
+     *
+     * Tests if Logger::initialiseAdapters initialises the adapters during instantiation of a Logger instance
+     *
+     * @depends testAddAdapterWithIdentifierThrowsLogicExceptionWhenAlreadyUsed
+     * @access public
+     * @return void
+     **/
+    public function testInitialiseAdapters()
+    {
+        $adapterConfigurations = array(
+            array("className" => "AtomicPHP\\Logging\\Adapters\\MemoryLogAdapter", "identifier" => "test1", "configuration" => array() ),
+            array("className" => "AtomicPHP\\Logging\\Adapters\\MailLogAdapter", "identifier" => "test2", "configuration" => array() ),
+        );
+
+        $logger = new Logger($adapterConfigurations);
+
+        $this->assertInstanceOf("AtomicPHP\\Logging\\Adapters\\MemoryLogAdapter", $logger->getAdapter("test1") );
+        $this->assertInstanceOf("AtomicPHP\\Logging\\Adapters\\MailLogAdapter", $logger->getAdapter("test2") );
     }
 
     /**
