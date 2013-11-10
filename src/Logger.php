@@ -43,6 +43,18 @@ class Logger extends AbstractLogger
     protected $adapters = array();
 
     /**
+     * __construct
+     *
+     * @access public
+     * @param  array  $adapterConfigurations
+     * @return Logger
+     **/
+    public function __construct(array $adapterConfigurations = array() )
+    {
+        $this->initialiseAdapters($adapterConfigurations);
+    }
+
+    /**
      * getAdapters
      *
      * Returns the array with registered log adapter instances
@@ -169,6 +181,37 @@ class Logger extends AbstractLogger
         }
 
         return static::$logLevels;
+    }
+
+    /**
+     * initialiseAdapters
+     *
+     * Initialises log adapters based on the $adapterConfigurations
+     *
+     * @access protected
+     * @param  array $adapterConfigurations
+     * @return void
+     **/
+    protected function initialiseAdapters(array $adapterConfigurations) {
+        foreach ($adapterConfigurations as $adapterConfiguration) {
+            if (array_key_exists("className", $adapterConfiguration) && class_exists($adapterConfiguration["className"]) ) {
+                $channels = array();
+                $configuration = array();
+                $identifier = null;
+                if (array_key_exists("identifier", $adapterConfiguration) && is_string($adapterConfiguration["identifier"]) ) {
+                    $identifier = $adapterConfiguration["identifier"];
+                }
+                if (array_key_exists("channels", $adapterConfiguration) && is_array($adapterConfiguration["channels"]) ) {
+                    $channels = $adapterConfiguration["channels"];
+                }
+                if (array_key_exists("configuration", $adapterConfiguration) && is_array($adapterConfiguration["configuration"]) ) {
+                    $configuration = $adapterConfiguration["configuration"];
+                }
+
+                $adapter = new $adapterConfiguration["className"]($channels, $configuration);
+                $this->addAdapter($adapter, $identifier);
+            }
+        }
     }
 
     /**
