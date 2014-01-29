@@ -1,15 +1,15 @@
 <?php
 
-namespace AtomicPHP\Logging\Tests;
+namespace Nijens\Logging\Tests;
 
-use \AtomicPHP\Logging\Adapters\SentryLogAdapter;
-use \Psr\Log\LogLevel;
+use Nijens\Logging\Adapters\SentryLogAdapter;
+use Psr\Log\LogLevel;
 
 /**
  * SentryLogAdapterTest
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Tests
+ * @package Nijens\Logging\Tests
  * */
 class SentryLogAdapterTest extends AbstractLogAdapterTest
 {

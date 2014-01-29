@@ -1,15 +1,15 @@
 <?php
 
-namespace AtomicPHP\Logging\Adapters;
+namespace Nijens\Logging\Adapters;
 
-use \DateTime;
-use \RuntimeException;
+use DateTime;
+use RuntimeException;
 
 /**
  * StreamLogAdapter
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Adapters
+ * @package Nijens\Logging\Adapters
  **/
 class StreamLogAdapter extends AbstractLogAdapter
 {

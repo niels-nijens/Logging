@@ -1,12 +1,12 @@
 <?php
 
-namespace AtomicPHP\Logging\Adapters;
+namespace Nijens\Logging\Adapters;
 
 /**
  * LogAdapterInterface
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Adapters
+ * @package Nijens\Logging\Adapters
  **/
 interface LogAdapterInterface {
 

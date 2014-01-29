@@ -1,14 +1,14 @@
 <?php
 
-namespace AtomicPHP\Logging\Adapters;
+namespace Nijens\Logging\Adapters;
 
-use \DateTime;
+use DateTime;
 
 /**
  * MemoryLogger
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Adapters
+ * @package Nijens\Logging\Adapters
  **/
 class MemoryLogAdapter extends AbstractLogAdapter
 {

@@ -1,14 +1,14 @@
 <?php
 
-namespace AtomicPHP\Logging\Tests;
+namespace Nijens\Logging\Tests;
 
-use \AtomicPHP\Logging\Adapters\MemoryLogAdapter;
+use Nijens\Logging\Adapters\MemoryLogAdapter;
 
 /**
  * MemoryLogAdapterTest
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Tests
+ * @package Nijens\Logging\Tests
  **/
 class MemoryLogAdapterTest extends AbstractLogAdapterTest
 {

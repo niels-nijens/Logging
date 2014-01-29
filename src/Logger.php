@@ -1,19 +1,19 @@
 <?php
 
-namespace AtomicPHP\Logging;
+namespace Nijens\Logging;
 
-use \LogicException;
-use \AtomicPHP\Logging\Adapters\ErrorLogAdapter;
-use \AtomicPHP\Logging\Adapters\LogAdapterInterface;
-use \Psr\Log\AbstractLogger;
-use \Psr\Log\InvalidArgumentException;
-use \Psr\Log\LogLevel;
+use LogicException;
+use Nijens\Logging\Adapters\ErrorLogAdapter;
+use Nijens\Logging\Adapters\LogAdapterInterface;
+use Psr\Log\AbstractLogger;
+use Psr\Log\InvalidArgumentException;
+use Psr\Log\LogLevel;
 
 /**
  * Logger
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging
+ * @package Nijens\Logging
  **/
 class Logger extends AbstractLogger
 {

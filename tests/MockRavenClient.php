@@ -1,14 +1,14 @@
 <?php
 
-namespace AtomicPHP\Logging\Tests;
+namespace Nijens\Logging\Tests;
 
-use \Raven_Client;
+use Raven_Client;
 
 /**
  * MockRavenClient
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Tests
+ * @package Nijens\Logging\Tests
  * */
 class MockRavenClient extends Raven_Client
 {

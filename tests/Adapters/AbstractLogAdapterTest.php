@@ -1,15 +1,15 @@
 <?php
 
-namespace AtomicPHP\Logging\Tests;
+namespace Nijens\Logging\Tests;
 
-use \Exception;
-use \Psr\Log\LogLevel;
+use Exception;
+use Psr\Log\LogLevel;
 
 /**
  * AbstractLogAdapterTest
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Tests
+ * @package Nijens\Logging\Tests
  **/
 abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,7 +23,7 @@ abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
      **/
     public function testImplementsLogAdapterInterface()
     {
-        $this->assertInstanceOf("AtomicPHP\\Logging\\Adapters\\LogAdapterInterface", $this->getAdapter() );
+        $this->assertInstanceOf("Nijens\\Logging\\Adapters\\LogAdapterInterface", $this->getAdapter() );
     }
 
     /**

@@ -1,16 +1,16 @@
 <?php
 
-namespace AtomicPHP\Logging\Adapters;
+namespace Nijens\Logging\Adapters;
 
-use \Exception;
-use \Raven_Client;
-use \Psr\Log\LogLevel;
+use Exception;
+use Raven_Client;
+use Psr\Log\LogLevel;
 
 /**
  * SentryLogAdapter
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Adapters
+ * @package Nijens\Logging\Adapters
  * */
 class SentryLogAdapter extends AbstractLogAdapter
 {

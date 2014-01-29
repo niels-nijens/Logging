@@ -1,12 +1,12 @@
 <?php
 
-namespace AtomicPHP\Logging\Adapters;
+namespace Nijens\Logging\Adapters;
 
 /**
  * MailLogAdapter
  *
  * @author  Niels Nijens <nijens.niels@gmail.com>
- * @package AtomicPHP\Logging\Adapters
+ * @package Nijens\Logging\Adapters
  **/
 class MailLogAdapter extends AbstractLogAdapter
 {

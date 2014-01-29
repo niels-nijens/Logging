@@ -1,11 +1,11 @@
 <?php
 
-namespace AtomicPHP\Logging\Tests;
+namespace Nijens\Logging\Tests;
 
-use \AtomicPHP\Logging\Logger;
-use \AtomicPHP\Logging\Adapters\MemoryLogAdapter;
-use \Psr\Log\LogLevel;
-use \Psr\Log\Test\LoggerInterfaceTest;
+use Nijens\Logging\Logger;
+use Nijens\Logging\Adapters\MemoryLogAdapter;
+use Psr\Log\LogLevel;
+use Psr\Log\Test\LoggerInterfaceTest;
 
 /**
  * LoggerTest
@@ -52,7 +52,7 @@ class LoggerTest extends LoggerInterfaceTest
         $logger = new Logger();
         $logger->addAdapter(new MemoryLogAdapter(), "test");
 
-        $this->assertInstanceOf("AtomicPHP\\Logging\\Adapters\\MemoryLogAdapter", $logger->getAdapter("test") );
+        $this->assertInstanceOf("Nijens\\Logging\\Adapters\\MemoryLogAdapter", $logger->getAdapter("test") );
     }
 
     /**
@@ -84,14 +84,14 @@ class LoggerTest extends LoggerInterfaceTest
     public function testInitialiseAdapters()
     {
         $adapterConfigurations = array(
-            array("className" => "AtomicPHP\\Logging\\Adapters\\MemoryLogAdapter", "identifier" => "test1", "configuration" => array() ),
-            array("className" => "AtomicPHP\\Logging\\Adapters\\MailLogAdapter", "identifier" => "test2", "configuration" => array() ),
+            array("className" => "Nijens\\Logging\\Adapters\\MemoryLogAdapter", "identifier" => "test1", "configuration" => array() ),
+            array("className" => "Nijens\\Logging\\Adapters\\MailLogAdapter", "identifier" => "test2", "configuration" => array() ),
         );
 
         $logger = new Logger($adapterConfigurations);
 
-        $this->assertInstanceOf("AtomicPHP\\Logging\\Adapters\\MemoryLogAdapter", $logger->getAdapter("test1") );
-        $this->assertInstanceOf("AtomicPHP\\Logging\\Adapters\\MailLogAdapter", $logger->getAdapter("test2") );
+        $this->assertInstanceOf("Nijens\\Logging\\Adapters\\MemoryLogAdapter", $logger->getAdapter("test1") );
+        $this->assertInstanceOf("Nijens\\Logging\\Adapters\\MailLogAdapter", $logger->getAdapter("test2") );
     }
 
     /**
