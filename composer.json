@@ -1,5 +1,5 @@
 {
-    "name": "atomicphp/logging",
+    "name": "niels-nijens/logging",
     "type": "library",
     "description": "A PSR-3 compatible logging library for PHP 5.3+",
     "keywords": [
@@ -7,7 +7,7 @@
         "Logging",
         "Sentry"
     ],
-    "homepage": "https://github.com/AtomicPHP/Logging",
+    "homepage": "https://github.com/niels-nijens/Logging",
     "license": "MIT",
     "authors": [
         {
@@ -28,6 +28,8 @@
         "raven/raven": "Required for usage of SentryLogAdapter."
     },
     "autoload": {
-        "classmap": ["src/"]
+        "psr-4": {
+            "Nijens\\Logging\\": "src/"
+        }
     }
 }
