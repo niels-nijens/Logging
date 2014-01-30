@@ -29,7 +29,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Nijens\\Logging\\": "src/"
+            "Nijens\\Logging\\": "src/",
+            "Nijens\\Logging\\Tests\\": "tests/"
         }
     }
 }
