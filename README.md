@@ -4,6 +4,7 @@ A PSR-3 compatible logging library for PHP 5.3+
 
 [![Build Status](https://travis-ci.org/niels-nijens/Logging.png?branch=master)](https://travis-ci.org/niels-nijens/Logging)
 [![Coverage Status](https://coveralls.io/repos/niels-nijens/Logging/badge.png?branch=master)](https://coveralls.io/r/niels-nijens/Logging?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/9479ac09-76c7-4df2-8798-bb53643453ed/mini.png)](https://insight.sensiolabs.com/projects/9479ac09-76c7-4df2-8798-bb53643453ed)
 [![Latest Stable Version](https://poser.pugx.org/niels-nijens/logging/v/stable.png)](https://packagist.org/packages/niels-nijens/logging)
 
 
