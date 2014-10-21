@@ -104,6 +104,8 @@ abstract class AbstractLogAdapterTest extends \PHPUnit_Framework_TestCase
             array(LogLevel::NOTICE, array(), array("foo"), array(), true),
             array(LogLevel::NOTICE, array("channel" => "foo"), array("foo"), array(), true),
             array(LogLevel::NOTICE, array("channel" => "foo"), array(), array(), true),
+            array(LogLevel::NOTICE, array("channel" => "foo"), array("bar"), array(), false),
+            array(LogLevel::NOTICE, array("channel" => "foo"), array("bar", "foo"), array(), true),
             array(LogLevel::INFO, array(), array(), array("level" => LogLevel::INFO), true),
             array(LogLevel::INFO, array(), array(), array("level" => LogLevel::NOTICE), false),
             array(LogLevel::INFO, array("channel" => "foo"), array("foo"), array("level" => LogLevel::INFO), true),
